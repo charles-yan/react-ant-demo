@@ -6,7 +6,9 @@ import Immutable from 'immutable';
 import sages from './sagas'
 const sagaMiddleware =createSagaMiddleware()
 const middlewares = [];
+
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
 const initialState=Immutable.Map();
 if (process.env.NODE_ENV === `development`) {
     const { logger } = require(`redux-logger`);
