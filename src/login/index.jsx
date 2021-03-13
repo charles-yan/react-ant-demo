@@ -1,23 +1,23 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Form, Input, Button, message } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { Redirect } from 'react-router-dom'
 import "./login.css"
 import axios from "../api/axios"
 import Jwt from '../api/jwt'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { activeCreator as ac } from "../store/modules/authUser/index"
+import store from "../store/index"
 const Login = props => {
     const dispatch = useDispatch();
-    const user = useSelector(state => state);
-    useEffect(() => {
-        // dispatch(ac.setDataAsync());
-    }, []);
-    const user_id = user.getIn(["useReducer", "id"]);
-    console.log("login_user_id",user_id)
-    // if(!user_id){
-    //     return <Redirect to='/admin'/>
-    // }
+    dispatch(ac.loadDataSyncSaga());
+    let user = store.getState();
+    let user_id = user.getIn(["useReducer", "id"]);
+    console.log("login_user_id",user_id);
+    if (localStorage.getItem("jwt_token") && user_id) {
+        return <Redirect to='/' />
+    };
+  
     const onFinish = (values) => {
         console.log('Received values of form: ', values);
         const { username, password } = values;

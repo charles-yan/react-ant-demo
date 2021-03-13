@@ -1,8 +1,8 @@
-import {SET_AUTH_USER} from '../../activeTypes'
+// import {SET_AUTH_USER} from '../../activeTypes'
 // import axios from '../../../api/axios'
 const setDataSync= user => { //同步的
     return {
-        type:SET_AUTH_USER,
+        type:"SET_AUTH_USER",
         user
     }
 }
